@@ -28,7 +28,7 @@ class CellViewModel {
     
     init(title: String, description: String) {
         self.title = title
-        self.description = description
+        self.description = description        
     }
     
     func getImage(forUrl url: URL, completion: @escaping ()->Void) {

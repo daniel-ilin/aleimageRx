@@ -42,27 +42,35 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="dT1-HM-xCj">
+                                            <rect key="frame" x="105" y="60" width="20" height="20"/>
+                                        </activityIndicatorView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="4fk-mB-kl7" firstAttribute="leading" secondItem="p2u-YU-kYt" secondAttribute="leading" id="90U-G1-Yr1"/>
                                         <constraint firstItem="p2u-YU-kYt" firstAttribute="bottom" secondItem="WZd-2F-kpS" secondAttribute="bottomMargin" id="De7-NC-Nny"/>
+                                        <constraint firstItem="p2u-YU-kYt" firstAttribute="leading" secondItem="dT1-HM-xCj" secondAttribute="trailing" constant="94" id="Evp-hD-qlM"/>
                                         <constraint firstItem="Zjc-DG-ZnZ" firstAttribute="leading" secondItem="WZd-2F-kpS" secondAttribute="leadingMargin" id="P10-V2-Pwh"/>
                                         <constraint firstItem="Zjc-DG-ZnZ" firstAttribute="centerY" secondItem="WZd-2F-kpS" secondAttribute="centerY" id="Qsu-B7-52O"/>
                                         <constraint firstItem="Zjc-DG-ZnZ" firstAttribute="top" secondItem="WZd-2F-kpS" secondAttribute="topMargin" constant="-5" id="TO6-HT-4hh"/>
                                         <constraint firstItem="Zjc-DG-ZnZ" firstAttribute="top" secondItem="4fk-mB-kl7" secondAttribute="top" id="Ur8-8I-lbQ"/>
                                         <constraint firstItem="4fk-mB-kl7" firstAttribute="trailing" secondItem="p2u-YU-kYt" secondAttribute="trailing" id="dmo-g1-vZW"/>
                                         <constraint firstItem="p2u-YU-kYt" firstAttribute="top" secondItem="4fk-mB-kl7" secondAttribute="bottom" constant="8" id="goh-g4-wVD"/>
+                                        <constraint firstItem="Zjc-DG-ZnZ" firstAttribute="centerY" secondItem="dT1-HM-xCj" secondAttribute="centerY" id="k8E-E6-nZH"/>
+                                        <constraint firstItem="Zjc-DG-ZnZ" firstAttribute="centerX" secondItem="dT1-HM-xCj" secondAttribute="centerX" id="kfw-k1-bka"/>
                                         <constraint firstItem="4fk-mB-kl7" firstAttribute="trailing" secondItem="WZd-2F-kpS" secondAttribute="trailingMargin" id="pB1-RT-bbf"/>
                                         <constraint firstItem="4fk-mB-kl7" firstAttribute="leading" secondItem="Zjc-DG-ZnZ" secondAttribute="trailing" constant="8" id="rwT-zE-cpw"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="activityIndicator" destination="dT1-HM-xCj" id="2dd-Nb-DJW"/>
                                     <outlet property="aleImageView" destination="Zjc-DG-ZnZ" id="VHI-U2-bCd"/>
                                     <outlet property="descriptionLabel" destination="p2u-YU-kYt" id="77e-CU-FQc"/>
                                     <outlet property="titleLabel" destination="4fk-mB-kl7" id="iLn-Op-9Qh"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
+                        <sections/>
                     </tableView>
                     <navigationItem key="navigationItem" id="JAy-CC-I0o"/>
                 </tableViewController>

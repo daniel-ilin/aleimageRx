@@ -14,6 +14,7 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var aleImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     func configureCell() {
         guard let viewModel = viewModel else {
@@ -31,14 +32,30 @@ class TableViewCell: UITableViewCell {
             return
         }
 
-        guard let image = viewModel.image else {            
+        guard let image = viewModel.image else {
             return
         }
         
-        DispatchQueue.main.async {
-            self.aleImageView.image = image
+        DispatchQueue.main.async { [weak self] in
+            self?.aleImageView.image = image
+            self?.hideLoading()
         }
     }        
+    
+    func showLoading() {
+        aleImageView.image = nil
+        DispatchQueue.main.async { [weak self] in
+            self?.activityIndicator.isHidden = false
+            self?.activityIndicator.startAnimating()
+        }
+    }
+    
+    private func hideLoading() {
+        DispatchQueue.main.async { [weak self] in
+            self?.activityIndicator.stopAnimating()
+            self?.activityIndicator.isHidden = true
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
