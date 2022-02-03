@@ -63,10 +63,6 @@
                                 </connections>
                             </tableViewCell>
                         </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="snS-Vq-6jg" id="ZXz-dV-jlM"/>
-                            <outlet property="delegate" destination="snS-Vq-6jg" id="RfY-FF-ovr"/>
-                        </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="JAy-CC-I0o"/>
                 </tableViewController>

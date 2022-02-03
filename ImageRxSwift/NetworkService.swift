@@ -25,10 +25,17 @@ struct NetworkService {
         }
     }
     
-    func getImage(fromUrl url: URL) -> UIImage? {
-        guard let data = try? Data(contentsOf: url) else { return nil }
-        let image = UIImage(data: data)
-        return image
+    func getImage(fromUrl url: URL, completion: @escaping (UIImage?)->Void) {
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            let data = try? Data(contentsOf: url)
+            if data == nil {
+                completion(nil)                
+            } else {
+                let image = UIImage(data: data!)
+                completion(image)
+            }
+        }
+        task.resume()
     }
     
 }

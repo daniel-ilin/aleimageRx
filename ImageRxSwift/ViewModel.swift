@@ -19,7 +19,7 @@ struct ViewModel {
     
 }
 
-struct CellViewModel {
+class CellViewModel {
     private var networkService = NetworkService()
     
     var image: UIImage?
@@ -31,8 +31,10 @@ struct CellViewModel {
         self.description = description
     }
     
-    mutating func getImage(forUrl url: URL) {
-        guard let image = networkService.getImage(fromUrl: url) else { return }
-        self.image = image
+    func getImage(forUrl url: URL, completion: @escaping ()->Void) {
+        networkService.getImage(fromUrl: url, completion: { image in
+            self.image = image
+            completion()
+        })
     }
 }

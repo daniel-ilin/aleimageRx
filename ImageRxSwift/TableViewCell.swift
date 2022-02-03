@@ -31,8 +31,13 @@ class TableViewCell: UITableViewCell {
             return
         }
 
-        guard let image = viewModel.image else { return }
-        aleImageView.image = image
+        guard let image = viewModel.image else {            
+            return
+        }
+        
+        DispatchQueue.main.async {
+            self.aleImageView.image = image
+        }
     }        
     
     override func awakeFromNib() {
