@@ -6,60 +6,40 @@
 //
 
 import UIKit
+import RxSwift
 
 class TableViewCell: UITableViewCell {
 
-    var viewModel: CellViewModel?
+    private var viewModel: CellViewModel?
+    private var disposable: Disposable?
     
     @IBOutlet weak var aleImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
-    func configureCell() {
-        guard let viewModel = viewModel else {
-            return
-        }
-
-        guard let title = viewModel.title,
-              let description = viewModel.description else { return }
-        titleLabel.text = title
-        descriptionLabel.text = description
-    }
-    
-    func setImage() {
-        guard let viewModel = viewModel else {
-            return
-        }
-
-        guard let image = viewModel.image else {
-            return
-        }
         
-        DispatchQueue.main.async { [weak self] in
-            self?.aleImageView.image = image
-            self?.hideLoading()
-        }
-    }        
-    
-    func showLoading() {
+    func setViewModel(to viewModel: CellViewModel) {
         aleImageView.image = nil
-        DispatchQueue.main.async { [weak self] in
-            self?.activityIndicator.isHidden = false
-            self?.activityIndicator.startAnimating()
-        }
-    }
-    
-    private func hideLoading() {
-        DispatchQueue.main.async { [weak self] in
-            self?.activityIndicator.stopAnimating()
-            self?.activityIndicator.isHidden = true
-        }
+        disposable?.dispose()
+        
+        self.viewModel = viewModel
+        
+        titleLabel.text = viewModel.title
+        descriptionLabel.text = viewModel.description
+        
+        activityIndicator.startAnimating()
+        
+        disposable = self.viewModel?.getImage()
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] result in
+                self?.aleImageView.image = try? result.get()
+                self?.activityIndicator.stopAnimating()
+            }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        activityIndicator.hidesWhenStopped = true
     }    
 
 }

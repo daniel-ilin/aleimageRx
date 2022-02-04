@@ -13,28 +13,13 @@ struct ViewModel {
         
     private var networkService = NetworkService()
     
-    func fetchItems() -> Observable<Ales> {
-        return networkService.fetchAles()
+    private let alesURL = URL(string: "https://api.sampleapis.com/beers/ale")!
+    
+    
+    func fetchItems() -> Observable<[CellViewModel]> {
+        let alesObservable: Observable<Ales> = networkService.fetch(from: alesURL)
+        
+        return alesObservable.map{ $0.map { CellViewModel(ale: $0) } }
     }
     
-}
-
-class CellViewModel {
-    private var networkService = NetworkService()
-    
-    var image: UIImage?
-    var title: String?
-    var description: String?
-    
-    init(title: String, description: String) {
-        self.title = title
-        self.description = description        
-    }
-    
-    func getImage(forUrl url: URL, completion: @escaping ()->Void) {
-        networkService.getImage(fromUrl: url, completion: { image in
-            self.image = image
-            completion()
-        })
-    }
 }

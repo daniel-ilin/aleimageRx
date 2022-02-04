@@ -9,11 +9,15 @@ import Foundation
 import RxSwift
 import UIKit
 
+enum NetworkError: Error {
+    case someError
+}
+
 struct NetworkService {
     
-    func fetchAles<T: Decodable>() -> Observable<T> {
+    func fetch<T: Decodable>(from URL: URL) -> Observable<T> {
         return Observable.create { observer in
-            let task = URLSession.shared.dataTask(with: URL(string: "https://api.sampleapis.com/beers/ale")!) { data, response, error in
+            let task = URLSession.shared.dataTask(with: URL) { data, response, error in
                 guard let data = data, let decoded = try? JSONDecoder().decode(T.self, from: data) else { return }
                 observer.onNext(decoded)
                 observer.onCompleted()
@@ -25,17 +29,23 @@ struct NetworkService {
         }
     }
     
-    func getImage(fromUrl url: URL, completion: @escaping (UIImage?)->Void) {
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            let data = try? Data(contentsOf: url)
-            if data == nil {
-                completion(nil)                
-            } else {
-                let image = UIImage(data: data!)
-                completion(image)
+    func getImage(fromUrl url: URL) -> Single<UIImage> {
+        return Single.create { observer in
+            let task = URLSession.shared.dataTask(with: url) { data, response, error in
+                guard let data = data,
+                   let image = UIImage(data: data) else {
+                       observer(.failure(NetworkError.someError))
+                       return
+                }
+                
+                observer(.success(image))
+            }
+            task.resume()
+            
+            return Disposables.create {
+                task.cancel()
             }
         }
-        task.resume()
     }
     
 }

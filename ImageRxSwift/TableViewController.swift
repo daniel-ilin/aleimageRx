@@ -13,7 +13,7 @@ class TableViewController: UITableViewController {
     
     private let viewModel = ViewModel()
     
-    private let bag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,16 +30,8 @@ class TableViewController: UITableViewController {
         
         viewModel.fetchItems()
             .bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: TableViewCell.self)) {
-                index, ale, cell in
-                cell.viewModel = CellViewModel(title: ale.name, description: ale.price)
-                cell.showLoading()
-                cell.configureCell()
-                let url = URL(string: ale.image)
-                if url != nil {
-                    cell.viewModel?.getImage(forUrl: url!, completion: {
-                        cell.setImage()
-                    })
-                }
-            }.disposed(by: bag)
+                index, cellVM, cell in
+                cell.setViewModel(to: cellVM)
+            }.disposed(by: disposeBag)
     }
 }

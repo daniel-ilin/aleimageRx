@@ -17,6 +17,8 @@
 		96E0068427AB8B5500CC5F3E /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E0068327AB8B5500CC5F3E /* ViewModel.swift */; };
 		96E0068627AB8B6B00CC5F3E /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E0068527AB8B6B00CC5F3E /* NetworkService.swift */; };
 		96E0068827AB8B8D00CC5F3E /* Ale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E0068727AB8B8D00CC5F3E /* Ale.swift */; };
+		B5075B7B27ACAB3800C1A2E9 /* CellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5075B7A27ACAB3800C1A2E9 /* CellViewModel.swift */; };
+		B5075B7D27ACAEEA00C1A2E9 /* DefaultImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5075B7C27ACAEEA00C1A2E9 /* DefaultImages.swift */; };
 		EB40CEDE6CB917CB888A4B1F /* Pods_ImageRxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04A1CFC1FEF6CD582F80C20B /* Pods_ImageRxSwift.framework */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +38,8 @@
 		96E0068327AB8B5500CC5F3E /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		96E0068527AB8B6B00CC5F3E /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		96E0068727AB8B8D00CC5F3E /* Ale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ale.swift; sourceTree = "<group>"; };
+		B5075B7A27ACAB3800C1A2E9 /* CellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellViewModel.swift; sourceTree = "<group>"; };
+		B5075B7C27ACAEEA00C1A2E9 /* DefaultImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultImages.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,9 +78,11 @@
 				96E0066B27AB89FF00CC5F3E /* AppDelegate.swift */,
 				96E0066D27AB89FF00CC5F3E /* SceneDelegate.swift */,
 				96E0068327AB8B5500CC5F3E /* ViewModel.swift */,
-				96E0068527AB8B6B00CC5F3E /* NetworkService.swift */,
-				96E0067F27AB8A7200CC5F3E /* TableViewController.swift */,
+				B5075B7A27ACAB3800C1A2E9 /* CellViewModel.swift */,
+				B5075B7C27ACAEEA00C1A2E9 /* DefaultImages.swift */,
 				96E0068127AB8AB000CC5F3E /* TableViewCell.swift */,
+				96E0067F27AB8A7200CC5F3E /* TableViewController.swift */,
+				96E0068527AB8B6B00CC5F3E /* NetworkService.swift */,
 				96E0068727AB8B8D00CC5F3E /* Ale.swift */,
 				96E0067127AB89FF00CC5F3E /* Main.storyboard */,
 				96E0067427AB8A0000CC5F3E /* Assets.xcassets */,
@@ -220,7 +226,9 @@
 			files = (
 				96E0068427AB8B5500CC5F3E /* ViewModel.swift in Sources */,
 				96E0066C27AB89FF00CC5F3E /* AppDelegate.swift in Sources */,
+				B5075B7B27ACAB3800C1A2E9 /* CellViewModel.swift in Sources */,
 				96E0068227AB8AB000CC5F3E /* TableViewCell.swift in Sources */,
+				B5075B7D27ACAEEA00C1A2E9 /* DefaultImages.swift in Sources */,
 				96E0068027AB8A7200CC5F3E /* TableViewController.swift in Sources */,
 				96E0068827AB8B8D00CC5F3E /* Ale.swift in Sources */,
 				96E0068627AB8B6B00CC5F3E /* NetworkService.swift in Sources */,
