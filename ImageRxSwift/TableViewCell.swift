@@ -31,10 +31,10 @@ class TableViewCell: UITableViewCell {
         
         disposable = self.viewModel?.getImage()
             .observe(on: MainScheduler.instance)
-            .subscribe { [weak self] result in
-                self?.aleImageView.image = try? result.get()
+            .subscribe(onSuccess: { [weak self] image in
+                self?.aleImageView.image = image
                 self?.activityIndicator.stopAnimating()
-            }
+            })
     }
     
     override func awakeFromNib() {
