@@ -26,7 +26,10 @@ class TableViewCell: UITableViewCell {
         
         titleLabel.text = viewModel.title
         descriptionLabel.text = viewModel.description
-        
+        initializeImageDownload()
+    }
+    
+    private func initializeImageDownload() {
         activityIndicator.startAnimating()
         
         disposable = self.viewModel?.getImage()

@@ -12,7 +12,6 @@ import UIKit
 struct ViewModel {
         
     private var networkService = NetworkService()
-    
     private let alesURL = URL(string: "https://api.sampleapis.com/beers/ale")!
     
     

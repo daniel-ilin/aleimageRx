@@ -12,11 +12,13 @@ import RxCocoa
 class TableViewController: UITableViewController {
     
     private let viewModel = ViewModel()
-    
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.title = "Ales"
+        navigationController?.navigationBar.prefersLargeTitles = true
         
         configureTable()
     }
@@ -24,9 +26,6 @@ class TableViewController: UITableViewController {
     
     private func configureTable() {
         tableView.dataSource = nil
-        
-        navigationItem.title = "Ales"
-        navigationController?.navigationBar.prefersLargeTitles = true
         
         viewModel.fetchItems()
             .bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: TableViewCell.self)) {
