@@ -8,7 +8,7 @@
 import UIKit
 
 class TableViewCell: UITableViewCell {
-
+    
     var viewModel: CellViewModel?
     
     @IBOutlet weak var aleImageView: UIImageView!
@@ -16,11 +16,19 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    func configureCell() {
+    func configureCell(for ale: Ale) {
+        viewModel = CellViewModel(title: ale.name, description: ale.price)
+        showLoading()
+        
+        guard let url = URL(string: ale.image) else { return }
+        viewModel?.getImage(forUrl: url, completion: { [weak self] in
+            self?.setImage()
+        })
+        
         guard let viewModel = viewModel else {
             return
         }
-
+        
         guard let title = viewModel.title,
               let description = viewModel.description else { return }
         titleLabel.text = title
@@ -31,7 +39,7 @@ class TableViewCell: UITableViewCell {
         guard let viewModel = viewModel else {
             return
         }
-
+        
         guard let image = viewModel.image else {
             return
         }
@@ -40,7 +48,7 @@ class TableViewCell: UITableViewCell {
             self?.aleImageView.image = image
             self?.hideLoading()
         }
-    }        
+    }
     
     func showLoading() {
         aleImageView.image = nil
@@ -60,6 +68,6 @@ class TableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-    }    
-
+    }
+    
 }
