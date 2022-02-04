@@ -7,21 +7,34 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
 class TableViewCell: UITableViewCell {
 
     private var viewModel: CellViewModel?
-    private var disposable: Disposable?
+    private var disposeBag = DisposeBag()
     
     @IBOutlet weak var aleImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
         
-    func setViewModel(to viewModel: CellViewModel) {
-        aleImageView.image = nil
-        disposable?.dispose()
+    
+    // MARK: - Lifecycle
+    override func prepareForReuse() {
+        super.prepareForReuse()
         
+        aleImageView.image = nil
+        disposeBag = DisposeBag()
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        activityIndicator.hidesWhenStopped = true
+    }
+    
+    // MARK: - ViewModel related
+    func setViewModel(to viewModel: CellViewModel) {
         self.viewModel = viewModel
         
         titleLabel.text = viewModel.title
@@ -32,17 +45,12 @@ class TableViewCell: UITableViewCell {
     private func initializeImageDownload() {
         activityIndicator.startAnimating()
         
-        disposable = self.viewModel?.getImage()
+        self.viewModel?.getImage()
             .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { [weak self] image in
-                self?.aleImageView.image = image
-                self?.activityIndicator.stopAnimating()
-            })
+            .subscribe(onSuccess: { [aleImageView, activityIndicator] image in
+                aleImageView?.image = image
+                activityIndicator?.stopAnimating()
+            }).disposed(by: disposeBag)
     }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        activityIndicator.hidesWhenStopped = true
-    }    
 
 }
